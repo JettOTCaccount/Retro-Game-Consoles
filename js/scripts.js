@@ -1,9 +1,17 @@
 document.getElementById("loadButton").addEventListener("click", function() {
+	const message = document.getElementById("message");
+	const summary = document.getElementById("summary");
+	const cards = document.getElementById("cards");
+
+	message.textContent = "loading";
+	summary.textContent = "";
+	cards.innerHTML = "";
 	//create the request then sets what happens when it changes state
 	const xhr = new XMLHttpRequest();
 	xhr.open("GET", "https://ozarktechwebdev.com/api/consoles.json");
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
+			message.textContent = "";
 			//turn the text into object and gets the array
 			const data = JSON.parse(xhr.responseText);
 
@@ -44,11 +52,8 @@ document.getElementById("loadButton").addEventListener("click", function() {
 
 			summary.textContent = " amount: " + data.consoles.length + " oldest: " + oldest.name + " (" + oldest.year + ") newest: " + newest.name + " (" + newest.year + ")";
 
-
-
-
 		}
-		
+
 		else if (xhr.readyState == 4) {
 			message.textContent = "error the request failed with status: " + xhr.status;
 		}
