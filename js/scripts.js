@@ -52,12 +52,9 @@ document.getElementById("loadButton").addEventListener("click", function() {
 
 			summary.textContent = " amount: " + data.consoles.length + " oldest: " + oldest.name + " (" + oldest.year + ") newest: " + newest.name + " (" + newest.year + ")";
 
-		}
-
-		else if (xhr.readyState == 4) {
+		} else if (xhr.readyState == 4) {
 			message.textContent = "error the request failed with status: " + xhr.status;
 		}
 	};
-	
 	xhr.send();
 });
