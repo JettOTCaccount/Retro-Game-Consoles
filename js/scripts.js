@@ -36,7 +36,7 @@ document.getElementById("loadButton").addEventListener("click", function() {
 				if (data.consoles[i].year < oldest.year) {
 					oldest = data.consoles[i];
 				}
-				
+
 				if (data.consoles[i].year > newest.year) {
 					newest = data.consoles[i];
 				}
@@ -47,6 +47,10 @@ document.getElementById("loadButton").addEventListener("click", function() {
 
 
 
+		}
+		
+		else if (xhr.readyState == 4) {
+			message.textContent = "error the request failed with status: " + xhr.status;
 		}
 	};
 	
