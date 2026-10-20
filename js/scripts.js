@@ -6,9 +6,6 @@ document.getElementById("loadButton").addEventListener("click", function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			//turn the text into object and gets the array
 			const data = JSON.parse(xhr.responseText);
-			console.log(data);
-			console.log(data.consoles);
-			console.log(data.consoles.length);
 
 			//goes through the consoles and builds one card for each
 			for (let i = 0; i < data.consoles.length; i++) {
@@ -29,6 +26,27 @@ document.getElementById("loadButton").addEventListener("click", function() {
 				cards.appendChild(card);
 
 			}
+
+			//start with the first console as both oldest and newest
+			let oldest = data.consoles[0];
+			let newest = data.consoles[0];
+
+			//replace oldest or newest when a console is older or newer
+			for (let i = 1; i < data.consoles.length; i++) {
+				if (data.consoles[i].year < oldest.year) {
+					oldest = data.consoles[i];
+				}
+				
+				if (data.consoles[i].year > newest.year) {
+					newest = data.consoles[i];
+				}
+			}
+
+			summary.textContent = " amount: " + data.consoles.length + " oldest: " + oldest.name + " (" + oldest.year + ") newest: " + newest.name + " (" + newest.year + ")";
+
+
+
+
 		}
 	};
 	
